@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applejack</title>x
-    <link rel="icon" type="image/gif" href="Images/applejackwalking.gif">
+    <title>Happy Birthday Jeppie</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="lainbday.jpg">
 
     <style>
-        body {
-            background: radial-gradient(circle farthest-corner at top left, #8fddf9, #89ffb0);
-            font-family: 'Futura', sans-serif;
-            text-align: center;
-            background-size: cover;
-            color: #8fddf9;
-            height: 100%;
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
             width: 100%;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
+            font-family: 'Futura', sans-serif;
+            text-align: center;
+            color: #8fddf9;
         }
-        #applejackwalking {
-            width: 100%;
+
+        body {
+            /* Display full collage without cropping */
+            background-image: url('photo-collage.png.png'); /* your collage file */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain; /* shows full image with preserved aspect */
+            background-color: #ffc2fc; /* optional: fills space around the image */
+            background-attachment: fixed; /* keeps background static on scroll */
+        }
+
+        img {
             max-width: 250px;
             margin-top: 100px;
         }
-
     </style>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <br>
-
-    <img src="birthdayqr.png" alt="Applejack" id="applejackwalking">
-   <!-- <img src="applejackmad.gif" alt="Angry Applejack" id="applejackmad.gif" class="hidden">--> 
 
 
-   
     <audio autoplay loop>
         <source src="Happy Birthday To You  Birthday Songs 2024.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
     </audio>
+
 </body>
 </html>
