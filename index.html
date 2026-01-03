@@ -237,25 +237,37 @@
             return arr;
         }
 
-        // Create columns
-        for (let col = 0; col < columnCount; col++) {
-            const column = document.createElement('div');
-            column.className = `column ${col % 2 === 0 ? 'up' : 'down'}`;
-            
-            const shuffled = shuffleArray(images);
-            
-            // Duplicate images for seamless loop
-            const doubledImages = [...shuffled, ...shuffled];
-            
-            doubledImages.forEach(imgSrc => {
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = 'Background';
-                column.appendChild(img);
-            });
-            
-            bgContainer.appendChild(column);
-        }
+       // Create columns
+const imagesPerColumn = Math.ceil(images.length / columnCount);
+const shuffledMaster = shuffleArray(images);
+
+for (let col = 0; col < columnCount; col++) {
+    const column = document.createElement('div');
+    column.className = `column ${col % 2 === 0 ? 'up' : 'down'}`;
+    
+    // Slice a unique chunk for each column
+    const start = col * imagesPerColumn;
+    const end = start + imagesPerColumn;
+    const columnImages = shuffledMaster.slice(start, end);
+
+    // If a column runs short, wrap around
+    while (columnImages.length < imagesPerColumn) {
+        columnImages.push(...shuffledMaster.slice(0, imagesPerColumn - columnImages.length));
+    }
+
+    // Duplicate the chunk for smooth scrolling (but it’s the SAME chunk, no duplicates across screen)
+    const doubled = [...columnImages, ...columnImages];
+
+    doubled.forEach(imgSrc => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.alt = 'Background';
+        column.appendChild(img);
+    });
+
+    bgContainer.appendChild(column);
+}
+
 
         // Handle unlock
         const input = document.getElementById('unlockInput');
