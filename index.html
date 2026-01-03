@@ -285,21 +285,31 @@ for (let col = 0; col < columnCount; col++) {
                 }, 1000);
             }
         });
-        // Auto-unmute music after first user interaction
-        const bgMusic = document.getElementById("bgMusic");
-        
-        function unmuteAudio() {
-            bgMusic.muted = false;
-            bgMusic.play().catch(() => {});
-            
-            document.removeEventListener("mousemove", unmuteAudio);
-            document.removeEventListener("click", unmuteAudio);
-            document.removeEventListener("keydown", unmuteAudio);
-        }
-        
-        document.addEventListener("mousemove", unmuteAudio);
-        document.addEventListener("click", unmuteAudio);
-        document.addEventListener("keydown", unmuteAudio);
+                        // Auto-unmute music after first user interaction
+                const bgMusic = document.getElementById("bgMusic");
+                
+                function unlockAudio() {
+                    bgMusic.muted = false;
+                    bgMusic.volume = 1;
+                
+                    bgMusic.play().then(() => {
+                        console.log("Audio playing");
+                        removeListeners();
+                    }).catch(err => {
+                        console.log("Blocked:", err);
+                    });
+                }
+                
+                function removeListeners() {
+                    document.removeEventListener("click", unlockAudio);
+                    document.removeEventListener("keydown", unlockAudio);
+                    document.removeEventListener("touchstart", unlockAudio);
+                }
+                
+                // Browser-approved gestures only
+                document.addEventListener("click", unlockAudio);
+                document.addEventListener("keydown", unlockAudio);
+                document.addEventListener("touchstart", unlockAudio);
 
     </script>
 </body>
